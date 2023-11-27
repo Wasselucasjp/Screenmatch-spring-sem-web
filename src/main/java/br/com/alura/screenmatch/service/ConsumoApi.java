@@ -34,7 +34,6 @@ public class ConsumoApi {
 
         // Obtém o corpo da resposta como uma String.
         String json = response.body();
-
         // Retorna a String.
         return json;
     }
