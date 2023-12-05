@@ -24,6 +24,7 @@ public class Principal {
     private List <DadosSerie>dadosSeries = new ArrayList<>();
 
     public void exibeMenu() {
+        var opcao = -1;
         while(opcao != 0) {
             var menu = """
             1 - Buscar séries
@@ -34,7 +35,7 @@ public class Principal {
             """;
 
             System.out.println(menu);
-            var opcao = leitura.nextInt();
+            opcao = leitura.nextInt();
             leitura.nextLine();
 
             switch (opcao) {
@@ -66,4 +67,14 @@ public class Principal {
         return dadosSerie;
     }
 
+    private void buscarEpisodioPorSerie(){
+        DadosSerie dadosSerie = getDadosSerie();
+        List<DadosTemporada> temporadas = new ArrayList<>();
+        for (int i = 1 ; i <= dadosSerie.totalTemporadas(); i++) {
+            var json = consumo.obterDados(ENDERECO + dadosSerie.titulo().replace("","+")+ "&season="+i+API_KEY);
+            DadosTemporada dadosTemporada = conversor.obterDados(json, DadosTemporada.class);
+            temporadas.add(dadosTemporada);
+        }
+        temporadas.forEach(System.out::println);
+    }
 }
