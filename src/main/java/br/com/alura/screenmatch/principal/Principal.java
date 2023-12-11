@@ -36,6 +36,7 @@ public class Principal {
                     2 - Buscar episódios
                     3 - Listar séries buscadas   
                     4 - Buscar série por titulo 
+                    5 - Buscar Séries por ator
                     0 - Sair                                 
                     """;
 
@@ -55,6 +56,8 @@ public class Principal {
                     break;
                 case 4:
                     buscarSeriePorTitulo();
+                case 5:
+                    buscarSeriesPorAtor();
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -127,7 +130,16 @@ public class Principal {
         }else {
             System.out.println("Série não encontrada !!!!");
         }
-
     }
 
+
+    private void buscarSeriesPorAtor() {
+        System.out.println("Qual o nome para busca? ");
+        var nomeAtor = leitura.nextLine();
+        System.out.println("Avaliações apartir de que valor ? ");
+        var avaliacao =  leitura.nextDouble();
+        List<Serie> seriesEncontradas = repository.findByAtoresContainingIgnoreCaseAndAvaliacaoGreaterThanEqual(nomeAtor, avaliacao);
+        System.out.println("Séries em que " + nomeAtor + "trabalhou: " );
+        seriesEncontradas.forEach(serie -> System.out.println(serie.getTitulo() + "avaliação " + serie.getAvaliacao()));
+    }
 }
