@@ -18,6 +18,8 @@ public class Episodio {
     @ManyToOne
     private Serie serie;
 
+
+
     public Episodio() {
     }
 
@@ -78,6 +80,9 @@ public class Episodio {
     public void setDataLancamento(LocalDate dataLancamento) {
         this.dataLancamento = dataLancamento;
     }
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
 
     @Override
     public String toString() {
@@ -88,4 +93,6 @@ public class Episodio {
                 ", avaliacao=" + avaliacao +
                 ", dataLancamento=" + dataLancamento ;
     }
+
+
 }
