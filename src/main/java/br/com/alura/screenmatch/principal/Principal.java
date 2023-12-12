@@ -36,6 +36,7 @@ public class Principal {
                     5 - Buscar séries por ator
                     6 - Buscar top 5 séries
                     7 - Buscar série por categoria 
+                    8 -  Filtrar séries
                     0 - Sair                                 
                     """;
 
@@ -175,10 +176,10 @@ public class Principal {
         System.out.println("Com avaliação apartir de qual valor? ");
         var avaliacao = leitura.nextDouble();
         leitura.nextLine();
-        List<Serie> filtroSeries = repository.findByTotalTemporadasLessThanEqualAndAvaliacaoGreaterThanEqual(totalTemporadas, avaliacao);
+        List<Serie> filtroSeries = repository.seriesPorTemporadaEAvaliacao(totalTemporadas,avaliacao);
         System.out.println("*** Séries filtradas ***");
         filtroSeries.forEach(
-                s -> System.out.println(s.getTitulo() + " avaliação " + s.getAvaliacao())
+                s -> System.out.println(s.getTitulo() + " - avaliação " + s.getAvaliacao())
         );
     }
 
