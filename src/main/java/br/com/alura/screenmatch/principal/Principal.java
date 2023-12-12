@@ -1,9 +1,6 @@
 package br.com.alura.screenmatch.principal;
 
-import br.com.alura.screenmatch.model.DadosSerie;
-import br.com.alura.screenmatch.model.DadosTemporada;
-import br.com.alura.screenmatch.model.Episodio;
-import br.com.alura.screenmatch.model.Serie;
+import br.com.alura.screenmatch.model.*;
 import br.com.alura.screenmatch.repository.SerieRepository;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
@@ -22,8 +19,8 @@ public class Principal {
     private final String API_KEY = "&apikey=6585022c";
     private  List<DadosSerie> dadosSeries = new ArrayList<>();
     private List<Serie> series = new ArrayList<>();
-
     private SerieRepository repository;
+    private String categoriaOmdb;
     public Principal(SerieRepository repository) {
         this.repository = repository;
     }
@@ -38,6 +35,7 @@ public class Principal {
                     4 - Buscar série por titulo 
                     5 - Buscar séries por ator
                     6 - Buscar top 5 séries
+                    7 - Buscar série por categoria 
                     0 - Sair                                 
                     """;
 
@@ -64,6 +62,8 @@ public class Principal {
                 case 6:
                     buscarTop5Series();
                     break;
+                case 7:
+                    buscarSeriePorCategoria();
                 case 0:
                     System.out.println("Saindo...");
                     break;
@@ -154,5 +154,14 @@ public class Principal {
         seriesTop5.forEach(
                 serie -> System.out.println(serie.getTitulo() + " avaliação " + serie.getAvaliacao())
         );
+    }
+
+    private void buscarSeriePorCategoria(){
+        System.out.println("Deseja buscar série de que categoria/gênero? ");
+        var nomeGenero = leitura.nextLine();
+        Categoria categoria = Categoria.fromSPortugues(nomeGenero);
+        List<Serie> seriesPorCategoria =  repository.findByGenero(categoria);
+        System.out.println("Séries da categoria " + nomeGenero);
+        seriesPorCategoria.forEach(System.out::println);
     }
 }
