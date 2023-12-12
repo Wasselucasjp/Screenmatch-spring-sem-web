@@ -18,8 +18,6 @@ public class Episodio {
     @ManyToOne
     private Serie serie;
 
-
-
     public Episodio() {
     }
 
@@ -49,11 +47,11 @@ public class Episodio {
         this.temporada = temporada;
     }
 
-    public Integer getNumero() {
+    public Integer getNumeroEpisodio() {
         return numeroEpisodio;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumeroEpisodio(Integer numero) {
         this.numeroEpisodio = numero;
     }
 
@@ -82,6 +80,10 @@ public class Episodio {
     }
     public void setSerie(Serie serie) {
         this.serie = serie;
+    }
+
+    public Serie getSerie() {
+        return serie;
     }
 
     @Override
